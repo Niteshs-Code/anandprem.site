@@ -4729,3 +4729,34 @@ ul {
     }
 
 }
+
+
+/* Mobile Navigation Close Icon Visibility Fix */
+.menu-toggle.active, 
+.menu-toggle[aria-expanded="true"],
+.navigation.active .menu-toggle,
+.header:not(.scrolled) .menu-toggle.active,
+.header:not(.scrolled) .navigation.active + .menu-toggle {
+    color: #333333 !important; /* Dark color for visibility on light menu drawer */
+    z-index: 9999 !important;   /* Keeps icon on top of overlay menu */
+    position: fixed !important;  /* Keeps icon in place when menu opens */
+    top: 20px !important;        /* Adjust position as per top header height */
+    right: 20px !important;      /* Adjust position as per right header margin */
+}
+
+/* Ensure hamburger spans/icon inside active button switch color correctly */
+.menu-toggle.active span,
+.menu-toggle[aria-expanded="true"] span {
+    background-color: #333333 !important;
+}
+
+
+/* Footer Social Icons Hover Fix */
+.footer-social a:hover {
+    background-color: #d4a359 !important; /* Golden background on hover */
+    border-color: #d4a359 !important;
+}
+
+.footer-social a:hover i {
+    color: #0d2c22 !important; /* Dark green/black icon color on hover so it stays visible */
+}

@@ -865,24 +865,7 @@ function initWhatsAppButtons() {
    14. PHONE LINKS
 ========================================================= */
 
-function initPhoneLinks() {
 
-    const phoneLinks =
-        document.querySelectorAll(
-            'a[href*="9827167330"]'
-        );
-
-
-    phoneLinks.forEach(link => {
-
-        link.setAttribute(
-            "href",
-            "tel:+919827167330"
-        );
-
-    });
-
-}
 
 
 /* =========================================================
@@ -917,7 +900,7 @@ function initImageFallbacks() {
    16. INITIALIZE OPTIONAL HELPERS
 ========================================================= */
 
-initPhoneLinks();
+
 
 initImageFallbacks();
 
