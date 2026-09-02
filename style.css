@@ -4760,3 +4760,25 @@ ul {
 .footer-social a:hover i {
     color: #0d2c22 !important; /* Dark green/black icon color on hover so it stays visible */
 }
+
+
+/* Mobile View Fix for Enquire Now Overlap */
+@media (max-width: 768px) {
+  /* Card aur Text ki fixed height ko open karna */
+  .card, 
+  .card-content, 
+  .card p {
+    height: auto !important;
+    max-height: none !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Link ko overlapping position se hata kar normal flow me lana */
+  .card-link {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+  }
+}
