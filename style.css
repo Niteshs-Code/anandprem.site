@@ -4782,3 +4782,88 @@ ul {
     margin-top: 10px !important;
   }
 }
+
+/* --- AUDIO WAVE BUTTON STYLING --- */
+.audio-wave-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
+    padding: 2px;
+    z-index: 1000;
+}
+
+/* Sound Wave Bars */
+.audio-wave-container .wave-bar {
+    width: 4px;
+    height: 4px; /* Jab pause hoga toh chote/flat rahenge */
+    background-color: #d4af37; /* Theme Gold Color */
+    border-radius: 2px;
+    transition: height 0.2s ease;
+}
+
+/* Jab audio PLAY hogi tab wave up-down (animation) kategi */
+.audio-wave-container.playing .wave-bar:nth-child(1) {
+    animation: waveAnim 0.6s infinite ease-in-out alternate;
+}
+.audio-wave-container.playing .wave-bar:nth-child(2) {
+    animation: waveAnim 0.4s infinite ease-in-out alternate;
+    animation-delay: 0.1s;
+}
+.audio-wave-container.playing .wave-bar:nth-child(3) {
+    animation: waveAnim 0.7s infinite ease-in-out alternate;
+    animation-delay: 0.2s;
+}
+.audio-wave-container.playing .wave-bar:nth-child(4) {
+    animation: waveAnim 0.5s infinite ease-in-out alternate;
+    animation-delay: 0.3s;
+}
+
+@keyframes waveAnim {
+    0% { height: 4px; }
+    100% { height: 22px; }
+}
+
+/* --- RESPONSIVE PLACEMENT --- */
+
+/* Desktop View: Bottom-Left Corner */
+@media(min-width: 768px) {
+    .audio-wave-container {
+        position: fixed;
+        bottom: 25px;
+        left: 25px;
+        background: rgba(30, 10, 15, 0.9);
+        border: 1px solid #d4af37;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px; /* Dando ke beech ki jagah */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    /* Desktop ke andar bars ki sizing */
+    .audio-wave-container .wave-bar {
+        width: 4px;
+        height: 8px;
+    }
+}
+
+/* Mobile View: Navbar ke beech me */
+@media(max-width: 767px) {
+    .audio-wave-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        gap: 3px;
+    }
+    /* Navbar parent ko relative rakhna zaroori hai taaki ye center me aaye */
+    nav, .navbar {
+        position: relative;
+    }
+}
