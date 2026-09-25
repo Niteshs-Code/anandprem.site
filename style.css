@@ -5102,3 +5102,35 @@ ul {
 .whatsapp-submit-btn:hover {
     background-color: #075E54;
 }
+
+.services-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.service-card {
+    height: auto !important;
+    min-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    padding: 30px !important;
+    box-sizing: border-box !important;
+}
+
+.service-card p {
+    margin-bottom: 20px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.card-link {
+    margin-top: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    position: relative !important;
+    z-index: 2 !important;
+}

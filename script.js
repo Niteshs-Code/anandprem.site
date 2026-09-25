@@ -69,10 +69,10 @@ function sendDonationWhatsApp(event) {
 
     // WhatsApp message format with Member ID
     const message = `New Donation Submission - Anand Foundation %0a` +
-                    `Name:* ${name} %0a` +
-                    `Location:* ${location} %0a` +
-                    `Email:* ${email} %0a` +
-                    `Member ID:* ${memberId} %0a%0a`;
+                    `Name: ${name} %0a` +
+                    `Location: ${location} %0a` +
+                    `Email: ${email} %0a` +
+                    `Member ID: ${memberId} %0a%0a`;
 
     // WhatsApp URL open karein
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
