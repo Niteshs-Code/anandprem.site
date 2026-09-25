@@ -5,7 +5,6 @@
    SCRIPT.JS
 ========================================================= */
 
-"use strict";
 
 
 /* =========================================================
@@ -38,6 +37,47 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =========================================================
    02. PRELOADER
 ========================================================= */
+
+
+// Function to copy UPI ID
+function copyUpiId() {
+    const upiText = document.getElementById("upi-text").innerText;
+    const copySuccess = document.getElementById("copy-success");
+
+    navigator.clipboard.writeText(upiText).then(() => {
+        copySuccess.style.display = "block";
+        setTimeout(() => {
+            copySuccess.style.display = "none";
+        }, 3000);
+    }).catch(err => {
+        console.error("Failed to copy text: ", err);
+    });
+}
+
+// Function to handle donation form and send WhatsApp message with Member ID
+function sendDonationWhatsApp(event) {
+    event.preventDefault();
+
+    // Form values fetch karein
+    const name = document.getElementById("donor-name").value.trim();
+    const location = document.getElementById("donor-location").value.trim();
+    const email = document.getElementById("donor-email").value.trim() || "Not Provided";
+    const memberId = document.getElementById("donor-memberid").value.trim();
+
+    // WhatsApp number jaha message bhejna hai (Yaha apna number daal dena)
+    const whatsappNumber = "919827167330"; 
+
+    // WhatsApp message format with Member ID
+    const message = `New Donation Submission - Anand Foundation %0a` +
+                    `Name:* ${name} %0a` +
+                    `Location:* ${location} %0a` +
+                    `Email:* ${email} %0a` +
+                    `Member ID:* ${memberId} %0a%0a`;
+
+    // WhatsApp URL open karein
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+}
 
 function initPreloader() {
 

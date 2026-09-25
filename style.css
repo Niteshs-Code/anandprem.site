@@ -4867,3 +4867,238 @@ ul {
         position: relative;
     }
 }
+
+
+/* ==================== DONATION SECTION STYLING ==================== */
+.donation-section {
+    background-color: #0b231e; /* Matching Anand Foundation dark green theme */
+    padding: 80px 20px;
+    color: #f4f4f4;
+    font-family: inherit;
+}
+
+.donation-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+@media(max-width: 900px) {
+    .donation-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Left Info Box */
+.donation-info-box .sub-heading {
+    color: #d4af37;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.donation-info-box .section-title {
+    font-size: 36px;
+    margin: 15px 0 20px 0;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.donation-info-box .section-title span {
+    color: #d4af37;
+    font-style: italic;
+}
+
+.donation-text-content p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.donation-text-content ul {
+    margin: 15px 0;
+    padding-left: 20px;
+    color: #ccc;
+}
+
+.donation-text-content ul li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.highlight-note {
+    background: rgba(212, 175, 55, 0.1);
+    border-left: 3px solid #d4af37;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff !important;
+    border-radius: 4px;
+}
+
+/* UPI & QR Box */
+.upi-payment-box {
+    background: #11322a;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.upi-payment-box h3 {
+    font-size: 18px;
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.qr-wrapper {
+    background: #fff;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.qr-img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    object-fit: contain;
+}
+
+.upi-id-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #0b231e;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px dashed #d4af37;
+    margin-bottom: 15px;
+}
+
+#upi-text {
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+#copy-btn {
+    background: #d4af37;
+    color: #0b231e;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+#copy-btn:hover {
+    background: #e6c55c;
+}
+
+/* Instructions list inside UPI box */
+.payment-instructions {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #ccc;
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.payment-instructions h4 {
+    color: #d4af37;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.payment-instructions ol {
+    padding-left: 18px;
+}
+
+.payment-instructions ol li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+/* Right Form Box (Matching Anand Foundation contact form style) */
+.donation-form-box {
+    background: #ffffff;
+    color: #222;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.form-header h3 {
+    font-size: 24px;
+    color: #0b231e;
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #0b231e;
+    background: #fff;
+}
+
+.whatsapp-submit-btn {
+    width: 100%;
+    background-color: #128C7E; /* WhatsApp green */
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+
+.whatsapp-submit-btn:hover {
+    background-color: #075E54;
+}

@@ -33,7 +33,7 @@
 
     <meta
         property="og:image"
-        content="https://niteshs-code.github.io/anandprem.site/oi-image.jpg"
+        content="https://niteshs-code.github.io/anandprem.site/assets/oi-image.jpg"
     >
 
 <meta
@@ -77,7 +77,7 @@
          FAVICON
     ====================================================== -->
 
-    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="assets/logo.png">
 
 
     <!-- =====================================================
@@ -147,7 +147,7 @@
         <a href="#home" class="logo">
 
             <img
-                src="logo.png"
+                src="assets/logo.png"
                 alt="Anand Foundation Logo"
             >
 
@@ -683,9 +683,9 @@ Since you have come, leave fulfilled. Do not miss this opportunity.”
 
             
 
-            <p>
+            <p style="font-size: 16px; color:black">
 
-                We offer authentic meditation practices and spiritual programs for schools, colleges, and organizations at no cost. Designed to help students and staff go deeper within, our sessions reduce stress, enhance focus, and bring greater awareness, balance, and inner peace to your campus.
+               The path of self-realization is divided into three levels and completed step-by-step. A minimum period of six months is required to complete Level One, which includes pranayama, concentration methods, and meditation. After this, the seeker moves to Level Two, which includes meditation methods and Naad listening. After completing Level Two, one has to practice Kriya Yoga, Jyoti Mudra, and Maha Mudra in Level Three. After these three levels, continuous practice for at least three years is necessary to attain self-realization. This path belongs to the Guru-Shishya tradition, therefore only those who have the eligibility to be a disciple should join. Whosoever seekers want to proceed on this path, they should fill and send the form and they are formally given initiation by the institution. For this, fill and send us the form given in this website. We will reply to you shortly.
 
             </p>
 
@@ -1118,6 +1118,94 @@ Since you have come, leave fulfilled. Do not miss this opportunity.”
 </section>
 
 
+<!-- ==================== DONATION SECTION ==================== -->
+<section id="donation-section" class="donation-section">
+    <div class="donation-container">
+        
+        <!-- Left Column: Info, Description & QR Code -->
+        <div class="donation-info-box">
+            <span class="sub-heading">SUPPORT OUR MISSION</span>
+            <h2 class="section-title">Contribute to a <br><span>Higher Purpose.</span></h2>
+            
+            <!-- Translated Description -->
+            <div class="donation-text-content">
+                <p>The work of the foundation is fulfilled through contributions provided by devotees. All spiritual and service-oriented activities run solely through the generosity of our donors.</p>
+                <ul>
+                    <li>Donations are completely voluntary.</li>
+                    <li>Contributions are accepted only from those connected with our foundation.</li>
+                    <li>Your support plays a vital role in helping us fulfill our objectives.</li>
+                </ul>
+                <p class="highlight-note"><strong>Note:</strong> Please make sure to fill out your details in the donation form after completing your contribution.</p>
+            </div>
+
+            <!-- UPI & QR Code Box -->
+            <div class="upi-payment-box">
+                <h3>Scan & Pay via UPI</h3>
+                <div class="qr-wrapper">
+                    <img src="assets/QRcode.jpeg" alt="UPI QR Code" class="qr-img">
+                </div>
+                
+                <div class="upi-id-container">
+                    <span id="upi-text">9827167330@airtel</span>
+                    <button type="button" id="copy-btn" onclick="copyUpiId()">Copy UPI ID</button>
+                </div>
+                <span id="copy-success" style="font-size: 12px; color: #d4af37; display: none; margin-top: 4px;">Copied to clipboard!</span>
+
+                <!-- Clear Step-by-Step Instructions -->
+                <div class="payment-instructions">
+                    <h4>How to make a payment:</h4>
+                    <ol>
+                        <li>Click the <strong>"Copy UPI ID"</strong> button above.</li>
+                        <li>Open any UPI app (Google Pay, PhonePe, Paytm, Airtel Payments Bank, etc.).</li>
+                        <li>Select <strong>"Pay to UPI ID"</strong> or <strong>"To UPI ID / Bank"</strong>, paste the copied ID, and complete your donation amount.</li>
+                        <li>Once paid, copy your <strong>Transaction / Donation ID (UTR)</strong> from your payment app.</li>
+                        <li>Fill out the form on the right and click <strong>"Send Details on WhatsApp"</strong>.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Donation Form -->
+    <!-- Right Column: Donation Form -->
+<div class="donation-form-box">
+    <div class="form-header">
+        <h3>Donation Details Form</h3>
+        <p>Submit your details below to notify us via WhatsApp.</p>
+    </div>
+
+    <form id="donationForm" onsubmit="sendDonationWhatsApp(event)">
+        <div class="input-group">
+            <label for="donor-name">YOUR NAME *</label>
+            <input type="text" id="donor-name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="input-group">
+            <label for="donor-location">LOCATION *</label>
+            <input type="text" id="donor-location" placeholder="Enter your city / state" required>
+        </div>
+
+        <div class="input-group">
+            <label for="donor-email">EMAIL ADDRESS</label>
+            <input type="email" id="donor-email" placeholder="Enter your email address">
+        </div>
+
+        <div class="input-group">
+            <label for="donor-memberid">MEMBER ID *</label>
+            <input type="text" id="donor-memberid" placeholder="Enter your Member ID" required>
+            <small style="color: #d4af37; font-size: 11px;">Mandatory for verification</small>
+        </div>
+
+        <button type="submit" class="whatsapp-submit-btn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            Send Details on WhatsApp
+        </button>
+    </form>
+</div>
+
+    </div>
+</section>
+
+
 <!-- =========================================================
      SPIRITUAL QUOTE
 ========================================================= -->
@@ -1485,7 +1573,7 @@ you simply need to know yourself.
             <div class="gallery-item">
 
                 <img
-                    src="gallery.jpeg"
+                    src="assets/gallery.jpeg"
                     alt="Mindful peaceful moment"
                     loading="lazy"
                 >
@@ -1498,7 +1586,7 @@ you simply need to know yourself.
             <div class="gallery-item">
 
                 <img
-                    src="real1.jpeg"
+                    src="assets/real1.jpeg"
                     alt="Mindful peaceful moment"
                     loading="lazy"
                 >
@@ -2188,7 +2276,7 @@ you simply need to know yourself.
                 >
 
                     <img
-                        src="logo.png"
+                        src="assets/logo.png"
                         alt="Anand Foundation Logo"
                     >
 
