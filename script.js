@@ -959,3 +959,75 @@ console.log(
     "font-size:12px;"
 );
  
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const openBtn = document.getElementById("openShareModal");
+    const closeBtn = document.getElementById("closeShareModal");
+    const modal = document.getElementById("shareModal");
+    const urlInput = document.getElementById("shareUrlInput");
+    const copyBtn = document.getElementById("copyUrlBtn");
+
+    const whatsappBtn = document.getElementById("shareWhatsApp");
+    const instagramBtn = document.getElementById("shareInstagram");
+    const telegramBtn = document.getElementById("shareTelegram");
+    const twitterBtn = document.getElementById("shareTwitter");
+
+    // Current page URL and Title fetch karega
+    const currentUrl = window.location.href;
+    const pageTitle = document.title || "Check out this amazing page!";
+
+    // Open Modal
+    openBtn.addEventListener("click", () => {
+        urlInput.value = currentUrl;
+        modal.style.display = "flex";
+        
+        // Setup Dynamic Share Links
+        // WhatsApp Share Link
+        whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(pageTitle + " - " + currentUrl)}`;
+        
+        // Telegram Share Link
+        telegramBtn.href = `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(pageTitle)}`;
+        
+        // Twitter/X Share Link
+        twitterBtn.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(pageTitle)}`;
+    });
+
+    // Instagram Special Handle (Instagram web direct link share nahi leta, isliye link copy karake user ko notice dega ya alert dega)
+    instagramBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            instagramBtn.querySelector("span").innerText = "Copied!";
+            setTimeout(() => {
+                instagramBtn.querySelector("span").innerText = "Instagram";
+            }, 2000);
+            alert("Link copied! You can now paste and share it on Instagram Story or DM.");
+        });
+    });
+
+    // Close Modal via X button
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // Close Modal when clicking outside popup box
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // Copy Link functionality
+    copyBtn.addEventListener("click", () => {
+        urlInput.select();
+        urlInput.setSelectionRange(0, 99999); // For mobile devices
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            copyBtn.innerText = "Copied!";
+            copyBtn.style.background = "#10b981";
+            setTimeout(() => {
+                copyBtn.innerText = "Copy Link";
+                copyBtn.style.background = "#4f46e5";
+            }, 2000);
+        });
+    });
+});

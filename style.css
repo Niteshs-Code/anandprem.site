@@ -5134,3 +5134,205 @@ ul {
     position: relative !important;
     z-index: 2 !important;
 }
+
+
+/* Share Widget Styles - Fixed Bottom Left Position */
+.custom-share-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 998;
+}
+
+/* Responsive Trigger Button: Circular on Mobile, Rounded Rectangle on Desktop */
+.share-trigger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #19963b, #1a8b47);
+    color: #ffffff;
+    border: none;
+    border-radius: 50px; /* Desktop ke liye pill/rectangle shape */
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.share-trigger-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+/* Mobile View ke liye Gol (Circular) Icon Setup */
+@media (max-width: 768px) {
+    .custom-share-container {
+        bottom: 20px;
+        left: 20px;
+    }
+    .share-trigger-btn {
+        width: 52px;
+        height: 52px;
+        padding: 0;
+        border-radius: 50%; /* Pure gol icon mobile ke liye */
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+    /* Text ko mobile me hide kar denge taaki sirf gol icon dikhe */
+    .share-trigger-btn span {
+        display: none;
+    }
+}
+
+/* Modal Overlay */
+.share-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+.share-modal-content {
+    background: #ffffff;
+    width: 90%;
+    max-width: 380px;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.share-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.share-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #1f2937;
+}
+
+.share-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.share-close-btn:hover {
+    color: #374151;
+}
+
+.share-subtitle {
+    margin: 6px 0 20px 0;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* Social Grid Icons */
+.share-options-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.share-option-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    gap: 6px;
+    transition: transform 0.2s;
+}
+
+.share-option-item:hover {
+    transform: translateY(-3px);
+}
+
+.share-icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.share-option-item span {
+    font-size: 11px;
+    font-weight: 500;
+    color: #4b5563;
+}
+
+/* Brand Colors */
+.share-option-item.whatsapp .share-icon-box { background: #25d366; }
+.share-option-item.instagram .share-icon-box { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.share-option-item.telegram .share-icon-box { background: #0088cc; }
+.share-option-item.twitter .share-icon-box { background: #000000; }
+
+/* Copy Link Area */
+.share-copy-section {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 10px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+}
+
+.share-copy-section input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #4b5563;
+    outline: none;
+    width: 100%;
+}
+
+.share-copy-section button {
+    background: #11af5d;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.share-copy-section button:hover {
+    background: #18954c;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
