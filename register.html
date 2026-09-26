@@ -236,8 +236,8 @@
 
     <div class="reg-container">
         <div class="reg-header">
-            <h2>ANAND FOUNDATION</h2>
-            <p>Devotee Registration Form (Initiation / Diksha / Dhyan Diksha)</p>
+            <h2>ANAND Spiritual FOUNDATION</h2>
+            <p>Devotee Registration Form (Initiation / Dhyan Diksha)</p>
         </div>
 
         <form id="devoteeRegForm" onsubmit="submitRegistration(event)">
@@ -251,8 +251,8 @@
                     <input type="text" id="fullName" required placeholder="Enter full name">
                 </div>
                 <div class="input-group">
-                    <label>Date of Birth *</label>
-                    <input type="date" id="dob" required>
+                    <label>Date of Birth / Age</label>
+                    <input type="text" id="dob" >
                 </div>
             </div>
 
@@ -292,8 +292,8 @@
 
             <div class="form-row">
                 <div class="input-group">
-                    <label>Pincode *</label>
-                    <input type="text" id="pincode" required placeholder="Pincode">
+                    <label>Pincode /ZIP Code / Postal Code *</label>
+                    <input type="text" id="pincode"  placeholder="Pincode">
                 </div>
                 <div class="input-group">
                     <label>Aadhar / Passport / ID No. *</label>
@@ -399,17 +399,41 @@
                 <label for="term2" style="display:inline; text-transform:none; font-weight:normal;">I understand the responsibility of joining the spiritual path and willingly accept the guidance of the Meditation Centre.</label>
             </div>
 
-            <!-- Digital Signature Section -->
-            <div class="signature-container">
-                <label style="font-size: 12px; font-weight: 700; color: #444; margin-bottom: 6px; display:block;">APPLICANT SIGNATURE *</label>
-                <canvas id="sigCanvas" class="signature-pad"></canvas>
-                <div class="sig-actions">
-                    <span style="font-size: 11px; color: #666;">Sign inside the box above using mouse or finger</span>
-                    <button type="button" class="clear-sig-btn" onclick="clearSignature()">Clear Signature</button>
-                </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="term3" required>
+    <label for="term3" style="display:inline; text-transform:none; font-weight:normal;">
+        I take an oath of confidentiality regarding the methods learned from the institution and will not share any method with anyone without the institution's permission. I understand that spiritual initiation (Vidhi Diksha) is performed only by the Guru; no one else has this authority. I will remain forever loyal to my Guru.
+    </label>
             </div>
+           
+            <!-- Digital Signature Section -->
+           <div class="signature-container">
+    <label style="font-size: 12px; font-weight: 700; color: #444; margin-bottom: 6px; display:block;">APPLICANT SIGNATURE *</label>
+    
+    <!-- Signature Options (Draw or Upload) -->
+    <div style="margin-bottom: 10px;">
+        <label><input type="radio" name="sigType" value="draw" checked onclick="toggleSigMode('draw')"> Draw Signature</label>
+        <label style="margin-left: 15px;"><input type="radio" name="sigType" value="upload" onclick="toggleSigMode('upload')"> Upload Signature Image</label>
+    </div>
 
-            <button type="submit" class="submit-reg-btn">Submit Registration & Save to Excel</button>
+    <!-- Canvas Box (Draw Mode) -->
+    <div id="drawModeBox">
+        <canvas id="sigCanvas" class="signature-pad" style="border: 1px solid #ccc; width: 100%; touch-action: none;"></canvas>
+        <div class="sig-actions" style="margin-top: 5px;">
+            <span style="font-size: 11px; color: #666;">Sign inside the box above using mouse or finger</span>
+            <button type="button" class="clear-sig-btn" onclick="clearSignature()">Clear Signature</button>
+        </div>
+    </div>
+
+    <!-- File Upload Box (Upload Mode - Initially hidden) -->
+    <div id="uploadModeBox" style="display: none;">
+        <input type="file" id="sigFile" accept="image/*" style="padding: 10px; border: 1px dashed #ccc; width: 100%;">
+        <span style="font-size: 11px; color: #666; display:block; margin-top:5px;">Upload clear image of your signature (PNG/JPG)</span>
+    </div>
+</div>
+
+<!-- Submit button waisa hi rahega -->
+<button type="submit" class="submit-reg-btn">Submit Registration & Save to Excel</button>
         </form>
     </div>
 
@@ -425,143 +449,194 @@
 
     <!-- JavaScript for Signature and Excel / Google Sheet Connection -->
    <script>
-        // Signature Pad Logic
-        const canvas = document.getElementById('sigCanvas');
-        const ctx = canvas.getContext('2d');
-        let painting = false;
-
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = 150;
+    // Mode Switch karne ke liye (Draw / Upload)
+    function toggleSigMode(mode) {
+        if (mode === 'draw') {
+            document.getElementById('drawModeBox').style.display = 'block';
+            document.getElementById('uploadModeBox').style.display = 'none';
+        } else {
+            document.getElementById('drawModeBox').style.display = 'none';
+            document.getElementById('uploadModeBox').style.display = 'block';
         }
-        window.addEventListener('load', resizeCanvas);
-        window.addEventListener('resize', resizeCanvas);
+    }
 
-        function startPosition(e) {
-            painting = true;
-            draw(e);
-        }
-        function finishedPosition() {
-            painting = false;
-            ctx.beginPath();
-        }
-        function draw(e) {
-            if (!painting) return;
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#000';
+    // Signature Pad Logic
+    const canvas = document.getElementById('sigCanvas');
+    const ctx = canvas.getContext('2d');
+    let painting = false;
 
-            const rect = canvas.getBoundingClientRect();
-            let x = (e.clientX || e.touches[0].clientX) - rect.left;
-            let y = (e.clientY || e.touches[0].clientY) - rect.top;
+    function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = 150;
+    }
+    window.addEventListener('load', resizeCanvas);
+    window.addEventListener('resize', resizeCanvas);
 
-            ctx.lineTo(x, y);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-        }
+    function startPosition(e) {
+        painting = true;
+        draw(e);
+    }
+    function finishedPosition() {
+        painting = false;
+        ctx.beginPath();
+    }
+    function draw(e) {
+        if (!painting) return;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = '#000';
 
-        canvas.addEventListener('mousedown', startPosition);
-        canvas.addEventListener('mouseup', finishedPosition);
-        canvas.addEventListener('mousemove', draw);
+        const rect = canvas.getBoundingClientRect();
+        let clientX = e.clientX || (e.touches ? e.touches[0].clientX : 0);
+        let clientY = e.clientY || (e.touches ? e.touches[0].clientY : 0);
+        
+        let x = clientX - rect.left;
+        let y = clientY - rect.top;
 
-        canvas.addEventListener('touchstart', startPosition);
-        canvas.addEventListener('touchend', finishedPosition);
-        canvas.addEventListener('touchmove', draw);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
 
-        function clearSignature() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', finishedPosition);
+    canvas.addEventListener('mousemove', draw);
 
-        // Custom Modal Functions
-        function showModal(title, message) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalMessage').innerText = message;
-            document.getElementById('customModal').style.display = 'flex';
-        }
+    // Mobile touch events with preventDefault (Screen scrolling rokne ke liye)
+    canvas.addEventListener('touchstart', function(e) {
+        startPosition(e);
+        e.preventDefault();
+    }, { passive: false });
 
-        function closeModal() {
-            document.getElementById('customModal').style.display = 'none';
-        }
+    canvas.addEventListener('touchend', function(e) {
+        finishedPosition();
+        e.preventDefault();
+    }, { passive: false });
 
-        // Form Submit & Excel Connection Function
-        function submitRegistration(event) {
+    canvas.addEventListener('touchmove', function(e) {
+        draw(e);
+        e.preventDefault(); 
+    }, { passive: false });
+
+    function clearSignature() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // Custom Modal Functions
+    function showModal(title, message) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalMessage').innerText = message;
+        document.getElementById('customModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('customModal').style.display = 'none';
+    }
+
+    // Form Submit & Excel Connection Function (Same IDs intact)
+    const formElement = document.getElementById('devoteeRegForm');
+    if(formElement) {
+        formElement.addEventListener('submit', function(event) {
             event.preventDefault();
 
             const submitBtn = document.querySelector('.submit-reg-btn');
             submitBtn.innerText = "Submitting...";
             submitBtn.disabled = true;
 
-            const formData = {
-                fullName: document.getElementById('fullName').value,
-                dob: document.getElementById('dob').value,
-                gender: document.getElementById('gender').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                nationality: document.getElementById('nationality').value,
-                address: document.getElementById('address').value,
-                pincode: document.getElementById('pincode').value,
-                idProof: document.getElementById('idProof').value,
-                maritalStatus: document.getElementById('maritalStatus').value,
-                education: document.getElementById('education').value,
-                occupation: document.getElementById('occupation').value,
-                q1: document.getElementById('q1').value,
-                q2: document.getElementById('q2').value,
-                q3: document.getElementById('q3').value,
-                q4: document.getElementById('q4').value,
-                q5: document.getElementById('q5').value,
-                q6: document.getElementById('q6').value,
-                q7: document.getElementById('q7').value,
-                q8: document.getElementById('q8').value,
-                q9: document.getElementById('q9').value,
-                q10: document.getElementById('q10').value,
-                q11: document.getElementById('q11').value,
-                signature: canvas.toDataURL()
-            };
+            const sigMode = document.querySelector('input[name="sigType"]:checked').value;
 
-            // Dono Google Sheets ke Web App URLs (Doosri sheet ka URL abhi khali choda hai taaki error na aaye)
-            const sheetUrl1 = "https://script.google.com/macros/s/AKfycbxipYOaD2e_9tClgYk-Xg1ZHfb_yTW3hSAFvytiBFXUkEdi49B3CyPlbixTRxBhO9GkEg/exec";
-            const sheetUrl2 = "YAHAN_DOOSRI_SHEET_KA_WEB_APP_URL"; 
+            if (sigMode === 'upload') {
+                const fileInput = document.getElementById('sigFile');
+                if (fileInput.files.length === 0) {
+                    alert("Please upload your signature image.");
+                    submitBtn.innerText = "Submit Registration & Save to Excel";
+                    submitBtn.disabled = false;
+                    return;
+                }
 
-            let requests = [
-                fetch(sheetUrl1, {
+                const reader = new FileReader();
+                reader.readAsDataURL(fileInput.files[0]);
+                reader.onload = function () {
+                    executeSubmit(reader.result);
+                };
+            } else {
+                executeSubmit(canvas.toDataURL());
+            }
+        });
+    }
+
+    function executeSubmit(signatureData) {
+        const submitBtn = document.querySelector('.submit-reg-btn');
+
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            dob: document.getElementById('dob').value,
+            gender: document.getElementById('gender').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            nationality: document.getElementById('nationality').value,
+            address: document.getElementById('address').value,
+            pincode: document.getElementById('pincode').value,
+            idProof: document.getElementById('idProof').value,
+            maritalStatus: document.getElementById('maritalStatus').value,
+            education: document.getElementById('education').value,
+            occupation: document.getElementById('occupation').value,
+            q1: document.getElementById('q1').value,
+            q2: document.getElementById('q2').value,
+            q3: document.getElementById('q3').value,
+            q4: document.getElementById('q4').value,
+            q5: document.getElementById('q5').value,
+            q6: document.getElementById('q6').value,
+            q7: document.getElementById('q7').value,
+            q8: document.getElementById('q8').value,
+            q9: document.getElementById('q9').value,
+            q10: document.getElementById('q10').value,
+            q11: document.getElementById('q11').value,
+            signature: signatureData // Wahi purana variable name taaki apps script change na ho!
+        };
+
+        const sheetUrl1 = "https://script.google.com/macros/s/AKfycbxipYOaD2e_9tClgYk-Xg1ZHfb_yTW3hSAFvytiBFXUkEdi49B3CyPlbixTRxBhO9GkEg/exec";
+        const sheetUrl2 = "YAHAN_DOOSRI_SHEET_KA_WEB_APP_URL"; 
+
+        let requests = [
+            fetch(sheetUrl1, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+        ];
+
+        if(sheetUrl2 && sheetUrl2 !== "YAHAN_DOOSRI_SHEET_KA_WEB_APP_URL") {
+            requests.push(
+                fetch(sheetUrl2, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 })
-            ];
-
-            // Agar doosri sheet ka URL dalega toh ye apne aap chal padega
-            if(sheetUrl2 && sheetUrl2 !== "YAHAN_DOOSRI_SHEET_KA_WEB_APP_URL") {
-                requests.push(
-                    fetch(sheetUrl2, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
-                    })
-                );
-            }
-
-            Promise.all(requests)
-            .then(() => {
-                submitBtn.innerText = "Submit Registration & Save to Excel";
-                submitBtn.disabled = false;
-                
-                // Purana alert hat kar ab ye naya professional popup aayega!
-                showModal("Success!", "Your registration has been successfully submitted and saved.");
-                
-                document.getElementById('devoteeRegForm').reset();
-                clearSignature();
-            })
-            .catch(error => {
-                console.error('Error!', error);
-                submitBtn.innerText = "Submit Registration & Save to Excel";
-                submitBtn.disabled = false;
-                showModal("Error", "Something went wrong. Please try again.");
-            });
+            );
         }
-    </script>
+
+        Promise.all(requests)
+        .then(() => {
+            submitBtn.innerText = "Submit Registration & Save to Excel";
+            submitBtn.disabled = false;
+            
+            showModal("Success!", "Your registration has been successfully submitted and saved.");
+            
+            document.getElementById('devoteeRegForm').reset();
+            clearSignature();
+            toggleSigMode('draw'); // wapas draw mode par set kar dega
+        })
+        .catch(error => {
+            console.error('Error!', error);
+            submitBtn.innerText = "Submit Registration & Save to Excel";
+            submitBtn.disabled = false;
+            showModal("Error", "Something went wrong. Please try again.");
+        });
+    }
+</script>
 </body>
 </html>
