@@ -233,6 +233,38 @@
 
 
 
+<!-- Language Switcher Bar -->
+<div class="asf-lang-wrapper notranslate" translate="no">
+  <button id="asfLangToggle" class="asf-lang-toggle-btn" type="button">
+    <span id="asfCurrentLang">🌐 English</span>
+    <span class="asf-arrow">▼</span>
+  </button>
+  
+  <div id="asfLangMenu" class="asf-lang-dropdown-menu">
+    <div class="asf-lang-list">
+      <button type="button" class="asf-lang-item" data-lang="en">English</button>
+      <button type="button" class="asf-lang-item" data-lang="hi">Hindi (हिंदी)</button>
+      <button type="button" class="asf-lang-item" data-lang="mr">Marathi (मराठी)</button>
+      <button type="button" class="asf-lang-item" data-lang="gu">Gujarati (ગુજરાતી)</button>
+      <button type="button" class="asf-lang-item" data-lang="ta">Tamil (தமிழ்)</button>
+      <button type="button" class="asf-lang-item" data-lang="te">Telugu (తెలుగు)</button>
+      <button type="button" class="asf-lang-item" data-lang="kn">Kannada (ಕನ್ನಡ)</button>
+      <button type="button" class="asf-lang-item" data-lang="ml">Malayalam (മലയാളം)</button>
+      <button type="button" class="asf-lang-item" data-lang="bn">Bengali (বাংলা)</button>
+      <button type="button" class="asf-lang-item" data-lang="pa">Punjabi (ਪੰਜਾਬੀ)</button>
+      <button type="button" class="asf-lang-item" data-lang="ur">Urdu (اردو)</button>
+      <button type="button" class="asf-lang-item" data-lang="as">Assamese (অসমীয়া)</button>
+      <button type="button" class="asf-lang-item" data-lang="or">Odia (ଓଡ଼ିଆ)</button>
+    </div>
+  </div>
+
+  <!-- Hidden Google Translator Element (Isko display: none ki jagah aise rakhna hai) -->
+<!-- Hidden Google Translate Element -->
+<div id="hidden_google_translator" style="position: absolute; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none;"></div>
+</div>
+
+
+
 <!-- =========================================================
      MAIN
 ========================================================= -->
@@ -1166,6 +1198,17 @@ Since you have come, leave fulfilled. Do not miss this opportunity.”
     </div>
 
 </section>
+
+<div class="asf-announcement-strip">
+  <div class="asf-strip-content">
+    <span class="asf-strip-text">
+      To receive Self-Realization / Meditation Initiation from our foundation, please fill out and submit the registration form.
+    </span>
+    <a href="https://anandspiritualfoundation.in/register.html" target="_blank" rel="noopener noreferrer" class="asf-strip-btn">
+      Click Here to Fill Form
+    </a>
+  </div>
+</div>
 
 
 <!-- ==================== DONATION SECTION ==================== -->
@@ -2566,7 +2609,7 @@ you simply need to know yourself.
 <!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
-
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="script.js"></script>
 
 </body>

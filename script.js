@@ -663,9 +663,9 @@ function initWhatsAppForm() {
 
 
             const whatsappMessage =
-`Namaste Anand Foundation 
-
-I would like to know more about your Yoga & Meditation programmes.
+`Hello!
+Anand Spiritual Foundation
+Please send me information regarding your Self-Realization Initiation / Meditation Initiation.
 
 Name: ${name}
 Phone: ${phone}
@@ -875,7 +875,9 @@ function initWhatsAppButtons() {
 
                 const customMessage =
                     button.dataset.whatsapp ||
-                    "Namaste Anand Foundation 🙏 I would like to know more about your Yoga & Meditation programmes.";
+                    `Hello!
+Anand Spiritual Foundation
+Please send me information regarding your Self-Realization Initiation / Meditation Initiation.`;
 
 
                 const url =
@@ -1030,4 +1032,92 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 2000);
         });
     });
+});
+
+
+// Google Translate Initialization
+
+// Global initialization for Google Translate
+window.googleTranslateElementInit = function() {
+  if (window.google && window.google.translate) {
+    new window.google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi,mr,gu,ta,te,kn,ml,bn,pa,ur,as,or',
+      autoDisplay: false
+    }, 'hidden_google_translator');
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.querySelector('.asf-lang-wrapper');
+  const langToggle = document.getElementById('asfLangToggle');
+  const langMenu = document.getElementById('asfLangMenu');
+  const langItems = document.querySelectorAll('.asf-lang-item');
+  const currentLangText = document.getElementById('asfCurrentLang');
+
+  // Toggle Dropdown Menu
+  if (langToggle && langMenu) {
+    langToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = langMenu.classList.toggle('show');
+      wrapper.classList.toggle('open', isOpen);
+    });
+
+    window.addEventListener('click', () => {
+      if (langMenu.classList.contains('show')) {
+        langMenu.classList.remove('show');
+        wrapper.classList.remove('open');
+      }
+    });
+  }
+
+  // Cookie helper function
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Set default state or active language based on cookie
+  const googTrans = getCookie("googtrans");
+  if (googTrans) {
+    const langCode = googTrans.split("/").pop();
+    const activeItem = document.querySelector(`.asf-lang-item[data-lang="${langCode}"]`);
+    if (activeItem && currentLangText) {
+      langItems.forEach(el => el.classList.remove('active'));
+      activeItem.classList.add('active');
+      currentLangText.innerText = `🌐 ${activeItem.innerText}`;
+    }
+  } else {
+    // Default English check
+    if (currentLangText) {
+      currentLangText.innerText = `🌐 English`;
+    }
+  }
+
+  // Language Item Click Handler
+  // Language Item Click Handler
+  langItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const langCode = item.getAttribute('data-lang');
+      
+      langMenu.classList.remove('show');
+      wrapper.classList.remove('open');
+
+      const hostname = window.location.hostname;
+
+      if (langCode === "en") {
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname}`;
+      } else {
+        const cookieValue = `/en/${langCode}`;
+        document.cookie = `googtrans=${cookieValue}; path=/;`;
+        document.cookie = `googtrans=${cookieValue}; path=/; domain=${hostname}`;
+      }
+
+      // Cache-busting reload taaki bina Ctrl+Shift+R ke bhi fresh page load ho aur translate ho jaye
+      window.location.href = window.location.pathname + '?lang=' + langCode + '&t=' + Date.now();
+    });
+  });
 });

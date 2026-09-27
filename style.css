@@ -5336,3 +5336,115 @@ ul {
     from { transform: scale(0.95); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
+
+.asf-lang-wrapper {
+  position: fixed;
+  top: 70px;
+  right: 30px;
+  z-index: 99999;
+  display: inline-block;
+  font-family: inherit;
+}
+
+.asf-lang-toggle-btn {
+  background-color: rgba(27, 59, 48, 0.95);
+  color: #f4e8c1;
+  border: 1px solid #d4af37;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.asf-lang-toggle-btn:hover {
+  background-color: #244d3f;
+  color: #ffffff;
+}
+
+.asf-arrow {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.asf-lang-wrapper.open .asf-arrow {
+  transform: rotate(180deg);
+}
+
+.asf-lang-dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background-color: #1b3b30;
+  border: 1px solid #d4af37;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  width: 200px;
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 100000;
+  padding: 6px;
+}
+
+.asf-lang-dropdown-menu.show {
+  display: block;
+}
+
+.asf-lang-item {
+  width: 100%;
+  padding: 8px 12px;
+  display: block;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.asf-lang-item:hover, .asf-lang-item.active {
+  background-color: rgba(212, 175, 55, 0.15);
+  color: #ffd700;
+  font-weight: 600;
+}
+
+/* Custom Scrollbar */
+.asf-lang-dropdown-menu::-webkit-scrollbar {
+  width: 5px;
+}
+.asf-lang-dropdown-menu::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 10px;
+}
+
+/* Hide Google default banner & tooltips */
+.goog-te-banner-frame, .goog-te-banner, .skiptranslate iframe, #goog-gt-tt, .goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+}
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+@media (max-width: 768px) {
+  .asf-lang-wrapper {
+    position: fixed;
+    top: 70px;
+    right: 15px;
+  }
+  .asf-lang-toggle-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
