@@ -689,8 +689,10 @@
 
     <!-- File Upload Box (Upload Mode - Initially hidden) -->
     <div id="uploadModeBox" style="display: none;">
-        <input type="file" id="sigFile" accept="image/*" style="padding: 10px; border: 1px dashed #ccc; width: 100%;">
-        <span style="font-size: 11px; color: #666; display:block; margin-top:5px;">Upload clear image of your signature (PNG/JPG)</span>
+       <input type="file" id="sigFile" accept="image/*,.pdf" style="padding: 10px; border: 1px dashed #ccc; width: 100%;">
+        <span style="font-size: 11px; color: #666; display:block; margin-top:5px;">
+    Upload your signature image or PDF (JPG, PNG, PDF)
+</span>
     </div>
 </div>
 
@@ -809,22 +811,60 @@
             const sigMode = document.querySelector('input[name="sigType"]:checked').value;
 
             if (sigMode === 'upload') {
-                const fileInput = document.getElementById('sigFile');
-                if (fileInput.files.length === 0) {
-                    alert("Please upload your signature image.");
-                    submitBtn.innerText = "Submit Registration & Save to Excel";
-                    submitBtn.disabled = false;
-                    return;
-                }
 
-                const reader = new FileReader();
-                reader.readAsDataURL(fileInput.files[0]);
-                reader.onload = function () {
-                    executeSubmit(reader.result);
-                };
-            } else {
-                executeSubmit(canvas.toDataURL());
-            }
+    const fileInput = document.getElementById('sigFile');
+
+    if (fileInput.files.length === 0) {
+        alert("Please upload your signature image or PDF.");
+        submitBtn.innerText = "Submit Registration & Save to Excel";
+        submitBtn.disabled = false;
+        return;
+    }
+
+    const selectedFile = fileInput.files[0];
+
+    // Maximum file size: 5 MB
+    if (selectedFile.size > 5 * 1024 * 1024) {
+        alert("Please upload a file smaller than 5 MB.");
+        submitBtn.innerText = "Submit Registration & Save to Excel";
+        submitBtn.disabled = false;
+        return;
+    }
+
+    // Allowed file types
+    const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/jpg",
+        "application/pdf"
+    ];
+
+    if (!allowedTypes.includes(selectedFile.type)) {
+        alert("Please upload JPG, PNG or PDF file only.");
+        submitBtn.innerText = "Submit Registration & Save to Excel";
+        submitBtn.disabled = false;
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+        executeSubmit(reader.result);
+    };
+
+    reader.onerror = function () {
+        alert("Unable to read the selected file.");
+        submitBtn.innerText = "Submit Registration & Save to Excel";
+        submitBtn.disabled = false;
+    };
+
+    reader.readAsDataURL(selectedFile);
+
+} else {
+
+    executeSubmit(canvas.toDataURL("image/png"));
+
+}
         });
     }
 
@@ -858,46 +898,58 @@
             signature: signatureData // Wahi purana variable name taaki apps script change na ho!
         };
 
+
         const sheetUrl1 = "https://script.google.com/macros/s/AKfycbxipYOaD2e_9tClgYk-Xg1ZHfb_yTW3hSAFvytiBFXUkEdi49B3CyPlbixTRxBhO9GkEg/exec";
-        const sheetUrl2 = "YAHAN_DOOSRI_SHEET_KA_WEB_APP_URL"; 
 
-        let requests = [
-            fetch(sheetUrl1, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-        ];
+const sheetUrl2 = "https://script.google.com/macros/s/AKfycbzH-lAZ4n1ePA3BNlFpu6x1-F2ff_FpCjCkWlWtMw7Qqgo5j2ySif25CeFfboGv4XmB/exec";
 
-        if(sheetUrl2 && sheetUrl2 !== "YAHAN_DOOSRI_SHEET_KA_WEB_APP_URL") {
-            requests.push(
-                fetch(sheetUrl2, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                })
-            );
-        }
+let requests = [
+    fetch(sheetUrl1, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+];
 
-        Promise.all(requests)
-        .then(() => {
-            submitBtn.innerText = "Submit Registration & Save to Excel";
-            submitBtn.disabled = false;
-            
-            showModal("Success!", "Your registration has been successfully submitted and saved.");
-            
-            document.getElementById('devoteeRegForm').reset();
-            clearSignature();
-            toggleSigMode('draw'); // wapas draw mode par set kar dega
+// Second Sheet
+if (sheetUrl2) {
+    requests.push(
+        fetch(sheetUrl2, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
         })
-        .catch(error => {
-            console.error('Error!', error);
-            submitBtn.innerText = "Submit Registration & Save to Excel";
-            submitBtn.disabled = false;
-            showModal("Error", "Something went wrong. Please try again.");
-        });
+    );
+}
+
+Promise.all(requests)
+.then(() => {
+    submitBtn.innerText = "Submit Registration & Save to Excel";
+    submitBtn.disabled = false;
+
+    showModal(
+        "Success!",
+        "Your registration has been successfully submitted and saved."
+    );
+
+    document.getElementById('devoteeRegForm').reset();
+    clearSignature();
+    toggleSigMode('draw');
+})
+.catch(error => {
+    console.error('Error!', error);
+
+    submitBtn.innerText = "Submit Registration & Save to Excel";
+    submitBtn.disabled = false;
+
+    showModal(
+        "Error",
+        "Something went wrong. Please try again."
+    );
+});
+ 
     }
 
 
